@@ -12,6 +12,6 @@ export class MainWorkspace extends React.Component {
 
 
     render() {
-        return <div/>;
+        return <div className="main-workspace"/>;
     }
 }

@@ -12,6 +12,6 @@ export class ElementsList extends React.Component {
 
 
     render() {
-        return <div/>;
+        return <div className="elements-list"/>;
     }
 }

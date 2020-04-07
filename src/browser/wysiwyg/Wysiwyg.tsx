@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {ElementsList} from "./ElementsList";
+import {MainWorkspace} from "./MainWorkspace";
 
 class WysiwygState {
     class: string;
@@ -13,6 +15,9 @@ export class Wysiwyg extends React.Component {
     }
 
     render() {
-        return <div/>;
+        return <div className="wysiwyg">
+            <ElementsList/>
+            <MainWorkspace/>
+        </div>;
     }
 }
