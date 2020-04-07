@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { injectable, postConstruct, inject } from 'inversify';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import { MessageService } from '@theia/core';
+import {injectable, postConstruct, inject} from 'inversify';
+import {ReactWidget} from '@theia/core/lib/browser/widgets/react-widget';
+import {MessageService} from '@theia/core';
+import {Wysiwyg} from './wysiwyg/Wysiwyg';
 
 @injectable()
 export class WysiwygWidget extends ReactWidget {
@@ -14,7 +14,7 @@ export class WysiwygWidget extends ReactWidget {
     protected readonly messageService!: MessageService;
 
     @postConstruct()
-    protected async init(): Promise < void> {
+    protected async init(): Promise<void> {
         this.id = WysiwygWidget.ID;
         this.title.label = WysiwygWidget.LABEL;
         this.title.caption = WysiwygWidget.LABEL;
@@ -24,11 +24,8 @@ export class WysiwygWidget extends ReactWidget {
     }
 
     protected render(): React.ReactNode {
-        const header = `This is a sample widget which simply calls the messageService
-        in order to display an info message to end users.`;
         return <div id='widget-container'>
-            <AlertMessage type='INFO' header={header} />
-            <button className='theia-button secondary' title='Display Message' onClick={_a => this.displayMessage()}>Display Message</button>
+            <Wysiwyg/>
         </div>
     }
 

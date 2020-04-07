@@ -3,7 +3,7 @@ import { WysiwygWidget } from './wysiwyg-widget';
 import { WysiwygContribution } from './wysiwyg-contribution';
 import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } from '@theia/core/lib/browser';
 
-import '../../src/browser/style/index.css';
+import '../../src/browser/style/css/index.css';
 
 export default new ContainerModule(bind => {
     bindViewContribution(bind, WysiwygContribution);
