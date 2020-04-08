@@ -1,0 +1,6 @@
+.main-workspace {
+  display: flex;
+  flex-direction: column; }
+  .main-workspace .image {
+    height: auto;
+    width: auto; }

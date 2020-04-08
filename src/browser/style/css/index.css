@@ -19,3 +19,10 @@
   .wysiwyg .elements-list {
     width: 25%;
     background: #546e7a; }
+
+.main-workspace {
+  display: flex;
+  flex-direction: column; }
+  .main-workspace .image {
+    height: auto;
+    width: auto; }

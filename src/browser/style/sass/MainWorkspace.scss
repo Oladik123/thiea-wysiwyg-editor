@@ -1,2 +1,9 @@
 .main-workspace {
+  display: flex;
+  flex-direction: column;
+
+  .image {
+    height: auto;
+    width :auto;
+  }
 }
