@@ -6,12 +6,16 @@
   height: 100%;
 
   .main-workspace {
-    width: 75%;
-    background: #212121;
+    height: 96%;
   }
 
   .elements-list {
     width: 25%;
     background: #546e7a;
+  }
+
+  .workspace {
+    width: 75%;
+    background: #100110;
   }
 }

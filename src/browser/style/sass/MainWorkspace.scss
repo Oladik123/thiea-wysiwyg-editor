@@ -1,9 +1,8 @@
 .main-workspace {
-  display: flex;
-  flex-direction: column;
+  position: relative;
 
-  .image {
-    height: auto;
-    width :auto;
+  .draggable-image {
+    margin: 0;
+    display: inline-block;
   }
 }

@@ -1,27 +1,33 @@
 import * as React from 'react';
 
+class ImageComponentProps {
+    image: any;
+}
+
 class ImageComponentState {
-    file: any;
+    image: any;
+    height: number;
+    width: number;
 }
 
 export class ImageComponent extends React.Component {
     state: ImageComponentState;
-
+    props: ImageComponentProps;
 
     constructor(props: any) {
         super(props);
 
-        this.state = {};
+        this.state = new ImageComponentState();
     }
 
-    static getDerivedStateFromProps(nextProps) {
+    static getDerivedStateFromProps(nextProps: any) {
         if (nextProps.image === null) {
             return {};
         }
 
         const image = nextProps.image;
         return {
-            file: image.src,
+            image: image.src,
             width: image.width,
             height: image.height
         }
@@ -29,8 +35,12 @@ export class ImageComponent extends React.Component {
 
 
     render() {
-        return this.state && this.state.file ?
-            <img src={this.state.file} height={this.state.height} width={this.state.width} /> :
+        return this.state && this.state.image ?
+            <img alt="uploaded image"
+                 draggable="false"
+                 src={this.state.image}
+                 height={this.state.height}
+                 width={this.state.width}/> :
             <div/>
     }
 }

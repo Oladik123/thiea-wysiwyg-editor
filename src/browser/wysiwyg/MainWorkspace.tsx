@@ -1,5 +1,10 @@
 import * as React from 'react';
 import {ImageComponent} from "./ImageComponent";
+import Draggable from 'react-draggable';
+
+class MainWorkspaceProps {
+    image: any;
+}
 
 class MainWorkspaceState {
     image: any;
@@ -7,6 +12,7 @@ class MainWorkspaceState {
 
 export class MainWorkspace extends React.Component {
     state: MainWorkspaceState;
+    props: MainWorkspaceProps;
 
     constructor(props: any) {
         super(props);
@@ -14,30 +20,39 @@ export class MainWorkspace extends React.Component {
             image: null
         };
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleStart = this.handleStart.bind(this);
+        this.handleDrag = this.handleDrag.bind(this);
+        this.handleStop = this.handleStop.bind(this);
+        this.getDraggableImageStyles = this.getDraggableImageStyles.bind(this);
     }
 
-    handleChange(event: any) {
-        const image = new Image();
-        image.src = URL.createObjectURL(event.target.files[0]);
-        image.onload = () => {
-            this.setState({
-                image: image,
-            })
-        };
+    handleStart() {
+        console.log('start');
+    }
 
-        this.setState({
-            file: URL.createObjectURL(event.target.files[0]),
-        })
-    };
+    handleDrag() {
+        console.log('drag');
+    }
+
+    handleStop() {
+        console.log('stop');
+    }
+
+    getDraggableImageStyles() {
+        const image = this.props.image;
+        return image === null ? {} : {
+            height: image.height,
+            width: image.width,
+        }
+    }
 
     render() {
         return <div className="main-workspace">
-            <input type="file"
-                   name="select image"
-                   accept={this.state.fileTypes}
-                   onChange={this.handleChange}/>
-            <ImageComponent image={this.state.image}/>
-        </div>;
+            <Draggable bounds="parent" disabled={this.props.image}>
+                <div className="draggable-image" style={this.getDraggableImageStyles()}>
+                    <ImageComponent image={this.props.image}/>
+                </div>
+            </Draggable>
+        </div>
     }
 }

@@ -1,6 +1,5 @@
 .main-workspace {
-  display: flex;
-  flex-direction: column; }
-  .main-workspace .image {
-    height: auto;
-    width: auto; }
+  position: relative; }
+  .main-workspace .draggable-image {
+    margin: 0;
+    display: inline-block; }

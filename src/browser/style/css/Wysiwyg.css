@@ -4,8 +4,10 @@
   width: 100%;
   height: 100%; }
   .wysiwyg .main-workspace {
-    width: 75%;
-    background: #212121; }
+    height: 96%; }
   .wysiwyg .elements-list {
     width: 25%;
     background: #546e7a; }
+  .wysiwyg .workspace {
+    width: 75%;
+    background: #100110; }
