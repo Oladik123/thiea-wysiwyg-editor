@@ -47,10 +47,12 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
+        const image = this.props.image;
+
         return <div className="main-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
-                    <ImageComponent image={this.props.image}/>
+                    <ImageComponent image={image ? image.image : null}/>
                 </div>
             </Draggable>
         </div>

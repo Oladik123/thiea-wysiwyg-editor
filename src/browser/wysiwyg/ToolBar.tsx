@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 class ToolBarProps {
-    onImageLoaded: any
+    onImageChange: any
 }
 
 class ToolBarState {
@@ -32,12 +32,7 @@ export class ToolBar extends React.Component {
     handleImageChange(event: any) {
         const image = new Image();
         image.src = URL.createObjectURL(event.target.files[0]);
-        image.onload = () => {
-            this.setState({
-                image: image,
-            });
-            this.state.onImageLoaded(image);
-        };
+        image.onload = () => this.props.onImageChange(image);
     };
 
     render() {

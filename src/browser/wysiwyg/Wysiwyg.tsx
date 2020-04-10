@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {ElementsList} from "./ElementsList";
-import {MainWorkspace} from "./MainWorkspace";
-import {ToolBar} from "./ToolBar";
+import {Provider} from 'react-redux'
+import {store} from "./Reducers"
+import ConnectedToolbar from "./ConnectedToolbar";
+import ConnectedMainWorkspace from "./ConnectedMainWorkspace";
 
 class WysiwygState {
     image: any;
@@ -15,23 +17,17 @@ export class Wysiwyg extends React.Component {
         this.state = {
             image: null
         };
-
-        this.onImageLoaded = this.onImageLoaded.bind(this);
-    }
-
-    onImageLoaded(image: any) {
-        this.setState({
-            image: image
-        })
     }
 
     render() {
         return <div className="wysiwyg">
-            <ElementsList/>
-            <div className="workspace">
-                <ToolBar onImageLoaded={this.onImageLoaded}/>
-                <MainWorkspace image={this.state.image}/>
-            </div>
+            <Provider store={store}>
+                <ElementsList/>
+                <div className="workspace">
+                    <ConnectedToolbar/>
+                    <ConnectedMainWorkspace/>
+                </div>
+            </Provider>
         </div>;
     }
 }
