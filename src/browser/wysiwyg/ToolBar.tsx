@@ -1,4 +1,6 @@
 import * as React from 'react';
+import {setImage} from "./ReduxBasics/Actions";
+import {connect} from "react-redux";
 
 class ToolBarProps {
     onImageChange: any
@@ -30,6 +32,10 @@ export class ToolBar extends React.Component {
     }
 
     handleImageChange(event: any) {
+        if (!event.target.files || event.target.files.size === 0) {
+            return;
+        }
+
         const image = new Image();
         image.src = URL.createObjectURL(event.target.files[0]);
         image.onload = () => this.props.onImageChange(image);
@@ -44,3 +50,24 @@ export class ToolBar extends React.Component {
         </div>;
     }
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        ...state
+    }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        onImageChange: (image: any) => {
+            dispatch(setImage(image))
+        }
+    }
+}
+
+const ConnectedToolbar = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ToolBar);
+
+export default ConnectedToolbar;

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {ImageComponent} from "./ImageComponent";
+import ConnectedMainImage from "./ImageComponent";
 import Draggable from 'react-draggable';
+import {connect} from "react-redux";
 
 class MainWorkspaceProps {
     image: any;
@@ -47,14 +48,24 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
-        const image = this.props.image;
-
         return <div className="main-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
-                    <ImageComponent image={image ? image.image : null}/>
+                    <ConnectedMainImage/>
                 </div>
             </Draggable>
         </div>
     }
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        ...state
+    }
+}
+
+const ConnectedMainWorkspace = connect(
+    mapStateToProps
+)(MainWorkspace);
+
+export default ConnectedMainWorkspace;

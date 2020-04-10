@@ -2,11 +2,10 @@ import * as React from 'react';
 import {ElementsList} from "./ElementsList";
 import {Provider} from 'react-redux'
 import {store} from "./Reducers"
-import ConnectedToolbar from "./ConnectedToolbar";
-import ConnectedMainWorkspace from "./ConnectedMainWorkspace";
+import ConnectedToolbar from "./ToolBar";
+import ConnectedMainWorkspace from "./MainWorkspace";
 
 class WysiwygState {
-    image: any;
 }
 
 export class Wysiwyg extends React.Component {
@@ -14,9 +13,6 @@ export class Wysiwyg extends React.Component {
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            image: null
-        };
     }
 
     render() {
