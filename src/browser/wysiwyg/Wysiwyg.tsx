@@ -4,33 +4,47 @@ import {Provider} from 'react-redux'
 import {store} from "./Reducers"
 import ConnectedToolbar from "./ToolBar";
 import ConnectedMainWorkspace from "./MainWorkspace";
-import {dragEndAction} from "./ReduxBasics/Actions";
+import {dragEndAction, resizeAction} from "./ReduxBasics/Actions";
 
-class WysiwygState {
+class WysiwygProps {
+    setCallback: Function;
 }
 
+class WysiwygState {}
+
 export class Wysiwyg extends React.Component {
+    props: WysiwygProps;
     state: WysiwygState;
 
     constructor(props: any) {
         super(props);
 
         this.onDragEnd = this.onDragEnd.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.onResize = this.onResize.bind(this);
+        this.props.setCallback(this.onResize);
     }
 
+    componentDidMount() {
+        this.onResize();
+    }
 
-    onDragEnd(result : any) {
+    onDragEnd(result: any) {
         store.dispatch(dragEndAction(result));
     }
 
+    onResize() {
+        store.dispatch(resizeAction(document));
+    }
+
     render() {
-        return <div className="wysiwyg" id={"wysiwyg"}>
+        return <div className="wysiwyg" id="wysiwyg">
             <Provider store={store}>
-                    <ConnectedElementsList/>
-                    <div className="workspace">
-                        <ConnectedToolbar/>
-                        <ConnectedMainWorkspace/>
-                    </div>
+                <ConnectedElementsList/>
+                <div className="workspace">
+                    <ConnectedToolbar/>
+                    <ConnectedMainWorkspace/>
+                </div>
             </Provider>
         </div>;
     }

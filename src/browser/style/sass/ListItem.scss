@@ -1,0 +1,30 @@
+.list-item {
+  display: flex;
+  flex-direction: row;
+
+  background: #6c6c6c;
+  border: #000000;
+  padding: 4px;
+  margin-bottom: 8px;
+  user-select: none;
+  position: relative;
+
+  &__labels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 22px;
+    color: #100110;
+    font-weight: bold;
+  }
+
+  &__properties {
+    font-size: 18px;
+  }
+
+  &__indicator {
+    margin-left: auto;
+  }
+}

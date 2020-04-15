@@ -48,7 +48,7 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
-        return <div className="main-workspace">
+        return <div className="main-workspace" id="wysiwyg-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
                     <ConnectedMainImage/>

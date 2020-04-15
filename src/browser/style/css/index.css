@@ -28,8 +28,27 @@
     margin: 0;
     display: inline-block; }
 
-.elements-list__droppable {
+.elements-list {
   box-sizing: border-box;
-  padding: 8px;
-  width: 100%;
-  height: 100%; }
+  padding: 8px; }
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  background: #6c6c6c;
+  border: #000000;
+  padding: 4px;
+  margin-bottom: 8px;
+  user-select: none;
+  position: relative; }
+  .list-item__labels {
+    display: flex;
+    flex-direction: column; }
+  .list-item__title {
+    font-size: 22px;
+    color: #100110;
+    font-weight: bold; }
+  .list-item__properties {
+    font-size: 18px; }
+  .list-item__indicator {
+    margin-left: auto; }
