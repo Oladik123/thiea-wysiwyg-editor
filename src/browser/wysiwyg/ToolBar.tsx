@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {setImage} from "./ReduxBasics/Actions";
+import {setImageAction} from "./ReduxBasics/Actions";
 import {connect} from "react-redux";
 
 class ToolBarProps {
@@ -60,7 +60,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         onImageChange: (image: any) => {
-            dispatch(setImage(image))
+            dispatch(setImageAction(image))
         }
     }
 }

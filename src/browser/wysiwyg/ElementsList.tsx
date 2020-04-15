@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DragDropContext} from 'react-beautiful-dnd'
+import {connect} from "react-redux";
 
 class ElementsListState {
 }
@@ -9,18 +9,22 @@ export class ElementsList extends React.Component {
 
     constructor(props: any) {
         super(props);
-
-        this.onDragEnd = this.onDragEnd.bind(this);
-    }
-
-    onDragEnd() {
-        console.log(100);
     }
 
     render() {
+        const elementList = this.props.dragState.unusedItems || [];
         return <div className="elements-list">
-            <DragDropContext onDragEnd={this.onDragEnd}>
-            </DragDropContext>
         </div>;
     }
 }
+
+const mapStateToProps = (state: any) => {
+    return {
+        ...state
+    }
+}
+const ConnectedElementsList = connect(
+    mapStateToProps
+)(ElementsList);
+
+export default ConnectedElementsList;

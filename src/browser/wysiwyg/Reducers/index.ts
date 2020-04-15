@@ -1,8 +1,9 @@
 import {combineReducers, createStore} from "redux";
-import {setImage} from "./ToolbarReducers";
+import {changeDragState, setImage} from "./Reducers";
 
 const rootReducer = combineReducers({
-    image: setImage
+    image: setImage,
+    dragState: changeDragState
 })
 
 

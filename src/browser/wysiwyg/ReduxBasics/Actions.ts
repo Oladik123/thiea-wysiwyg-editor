@@ -1,7 +1,7 @@
 export enum ActionTypes {
     setImage,
-    addIndicator,
-    removeIndicator
+    dragEnd,
+    resize
 }
 
 export default class Action {
@@ -9,11 +9,30 @@ export default class Action {
     data: any;
 }
 
-export function setImage(image : any) {
+export function setImageAction(image: any) {
     return {
         type: ActionTypes.setImage,
         data: {
             image: image
         }
     }
+}
+
+export function dragEndAction(result: any) {
+    return {
+        type: ActionTypes.dragEnd,
+        data: {
+            result: result
+        }
+    }
+}
+
+export function resizeAction(document: Document) {
+    return {
+        type: ActionTypes.resize,
+        data: {
+            document: document
+        }
+    }
+
 }
