@@ -2,6 +2,7 @@ export enum ActionTypes {
     setImage,
     dragEnd,
     dragStart,
+    drag,
     resize
 }
 
@@ -19,20 +20,32 @@ export function setImageAction(image: any) {
     }
 }
 
-export function dragEndAction(item: any) {
+export function dragEndAction(item: any, element: any) {
     return {
         type: ActionTypes.dragEnd,
         data: {
-            item: item
+            item: item,
+            element: element
         }
     }
 }
 
-export function dragStartAction(item: any) {
+export function dragStartAction(item: any, element: any) {
     return {
         type: ActionTypes.dragStart,
         data: {
-            item: item
+            item: item,
+            element: element
+        }
+    }
+}
+
+export function dragAction(item: any, element: any) {
+    return {
+        type: ActionTypes.drag,
+        data: {
+            item: item,
+            element: element
         }
     }
 }

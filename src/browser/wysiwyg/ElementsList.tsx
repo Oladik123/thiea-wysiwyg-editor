@@ -19,7 +19,7 @@ export class ElementsList extends React.Component {
     render() {
         const elementList = this.props.dragState.unusedItems || [];
         return <div className="elements-list" id="wysiwyg-elements-list">
-            {elementList.map(element => <ConnectedListItem item={element} key={element.id}/>)}
+            {elementList.map((element: any) => <ConnectedListItem item={element} key={element.id}/>)}
         </div>;
     }
 }

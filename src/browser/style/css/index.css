@@ -51,4 +51,5 @@
   .list-item__properties {
     font-size: 18px; }
   .list-item__indicator {
+    position: relative;
     margin-left: auto; }
