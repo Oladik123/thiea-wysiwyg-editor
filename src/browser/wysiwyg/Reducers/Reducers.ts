@@ -49,13 +49,41 @@ function onDragEnd(state: any, action: any) {
     };
 
     const item = action.data.item;
-    const stateItem = result.unusedItems.find((element: any) => item.id === element.id);
+    const element = action.data.element;
+    const unusedItem = result.unusedItems.find((element: any) => item.id === element.id);
 
-    if (stateItem) {
-        stateItem.fixedInList = true;
-        stateItem.dragTarget = DragSources.unusedItems;
+    if (unusedItem) {
+
+        if (!unusedItem.dragTarget || unusedItem.dragTarget === DragSources.unusedItems) {
+            unusedItem.dragTarget = DragSources.unusedItems;
+            unusedItem.fixedInList = true;
+        }
+
+        if (unusedItem.dragTarget === DragSources.usedItems) {
+            unusedItem.fixedInList = false;
+            unusedItem.workspacePosition = getPositionInWorkspace(state, element);
+            result.unusedItems = result.unusedItems.filter(item => item.id !== unusedItem.id);
+            result.usedItems.push(unusedItem);
+        }
+        return result;
     }
+
+    const usedItem = result.unusedItems.find((element: any) => item.id === element.id);
+    if (usedItem) {
+
+    }
+
     return result;
+
+    function getPositionInWorkspace(state, element) {
+        const workspaceRect = state.sizes.workspace;
+        const elementRect = element.getBoundingClientRect();
+        return {
+            x: elementRect.x - workspaceRect.x,
+            y: elementRect.y - workspaceRect.y,
+
+        }
+    }
 }
 
 function onDrag(state: any, action: any) {
@@ -65,9 +93,7 @@ function onDrag(state: any, action: any) {
 
     const item = action.data.item;
     const element = action.data.element;
-
     const target = getDroppableTarget(state, element);
-
     const stateItem = result.unusedItems.find((element: any) => item.id === element.id) ||
         result.usedItems.find((element: any) => item.id === element.id);
 

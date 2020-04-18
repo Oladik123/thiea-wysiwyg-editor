@@ -23,10 +23,14 @@
     background: #100110; }
 
 .main-workspace {
-  position: relative; }
+  position: absolute;
+  height: 100%;
+  width: 100%; }
   .main-workspace .draggable-image {
     margin: 0;
     display: inline-block; }
+  .main-workspace .indicator {
+    position: absolute; }
 
 .elements-list {
   box-sizing: border-box;

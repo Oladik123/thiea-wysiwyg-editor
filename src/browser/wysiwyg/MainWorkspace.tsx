@@ -48,12 +48,23 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
+        this.props.dragState.usedItems.forEach((item)=> console.log(item.workspacePosition.y))
         return <div className="main-workspace" id="wysiwyg-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
                     <ConnectedMainImage/>
                 </div>
             </Draggable>
+            {this.props.dragState.usedItems.map(item =>
+                <Draggable defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}
+                           key={item.id}>
+                    <div className="indicator">
+                        <svg height="50" width="50">
+                            <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>
+                        </svg>
+                    </div>
+                </Draggable>
+            )}
         </div>
     }
 }

@@ -14,6 +14,7 @@ export class ListItem extends React.Component {
     constructor(props: any) {
         super(props);
         this.elementRef = React.createRef();
+        this.draggableRef = React.createRef();
         this.state = {
             indicatorMargin: 0,
             indicatorWidth: 50,
@@ -22,14 +23,23 @@ export class ListItem extends React.Component {
         this.onMouseDown = this.onMouseDown.bind(this);
     }
 
+    componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<{}>, snapshot?: any): void {
+        if (this.props.item.fixedInList) {
+            this.draggableRef.current.setState({
+                x: 0,
+                y: 0
+            })
+        }
+    }
+
     onMouseDown(event) {
         this.state.indicatorMargin = event.clientX - this.elementRef.current.getBoundingClientRect().x - this.state.indicatorWidth / 2;
     }
 
     render() {
         const item = this.props.item;
-
-        return <Draggable position={getItemPosition(item)}
+        return <Draggable ref={this.draggableRef}
+                          position={getItemPosition(item)}
                           onDrag={() => this.props.onDrag(item, this.elementRef.current)}
                           onStop={() => this.props.onDragEnd(item, this.elementRef.current)}
                           onStart={() => this.props.onDragStart(item, this.elementRef.current)}
@@ -96,7 +106,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         onDragEnd: (item: any, element: any) => {
-            dispatch(dragEndAction(item, element))
+            setTimeout(() => dispatch(dragEndAction(item, element)), 100)
         },
         onDragStart: (item: any, element: any) => {
             dispatch(dragStartAction(item, element))

@@ -1,8 +1,14 @@
 .main-workspace {
-  position: relative;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 
   .draggable-image {
     margin: 0;
     display: inline-block;
+  }
+
+  .indicator{
+    position: absolute;
   }
 }
