@@ -4,13 +4,14 @@ import {Provider} from 'react-redux'
 import {store} from "./Reducers"
 import ConnectedToolbar from "./ToolBar";
 import ConnectedMainWorkspace from "./MainWorkspace";
-import {dragEndAction, resizeAction} from "./ReduxBasics/Actions";
+import {resizeAction} from "./ReduxBasics/Actions";
 
 class WysiwygProps {
     setCallback: Function;
 }
 
-class WysiwygState {}
+class WysiwygState {
+}
 
 export class Wysiwyg extends React.Component {
     props: WysiwygProps;
@@ -19,18 +20,12 @@ export class Wysiwyg extends React.Component {
     constructor(props: any) {
         super(props);
 
-        this.onDragEnd = this.onDragEnd.bind(this);
-        this.onDragEnd = this.onDragEnd.bind(this);
         this.onResize = this.onResize.bind(this);
         this.props.setCallback(this.onResize);
     }
 
     componentDidMount() {
         this.onResize();
-    }
-
-    onDragEnd(result: any) {
-        store.dispatch(dragEndAction(result));
     }
 
     onResize() {

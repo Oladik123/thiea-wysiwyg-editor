@@ -4,11 +4,11 @@ import Draggable from "react-draggable";
 import {dragAction, dragEndAction, dragStartAction} from "./ReduxBasics/Actions";
 import DragSources from "./Model/DragSources";
 
-class ListItemState {
+class VariableState {
 }
 
-export class ListItem extends React.Component {
-    state: ListItemState;
+export class Variable extends React.Component {
+    state: VariableState;
     elementRef: any;
 
     constructor(props: any) {
@@ -117,9 +117,9 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-const ConnectedListItem = connect(
+const ConnectedVariable = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ListItem);
+)(Variable);
 
-export default ConnectedListItem;
+export default ConnectedVariable;
