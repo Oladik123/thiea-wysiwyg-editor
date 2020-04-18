@@ -97,6 +97,7 @@ function onDrag(state: any, action: any) {
     const stateItem = result.unusedItems.find((element: any) => item.id === element.id) ||
         result.usedItems.find((element: any) => item.id === element.id);
 
+    stateItem.clientRect = element.getBoundingClientRect()
     stateItem.dragTarget = target;
     return result;
 

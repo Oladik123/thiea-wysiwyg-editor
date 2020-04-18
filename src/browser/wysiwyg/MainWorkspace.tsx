@@ -48,7 +48,17 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
-        this.props.dragState.usedItems.forEach((item)=> console.log(item.workspacePosition.y))
+        const getBounds = (item) => {
+            const listRect = this.props.dragState.sizes.list;
+            const workspaceRect = this.props.dragState.sizes.workspace;
+            const itemClientRect = item.clientRect;
+            console.log(itemClientRect.x, workspaceRect.y)
+            return {
+                left: -(workspaceRect.x - listRect.x),
+                top: 0,
+            }
+        }
+
         return <div className="main-workspace" id="wysiwyg-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
@@ -57,7 +67,7 @@ export class MainWorkspace extends React.Component {
             </Draggable>
             {this.props.dragState.usedItems.map(item =>
                 <Draggable defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}
-                           key={item.id}>
+                           key={item.id} bounds={getBounds(item)}>
                     <div className="indicator">
                         <svg height="50" width="50">
                             <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>

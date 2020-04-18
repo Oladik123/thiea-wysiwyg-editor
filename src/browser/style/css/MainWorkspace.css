@@ -3,6 +3,7 @@
   height: 100%;
   width: 100%; }
   .main-workspace .draggable-image {
+    position: absolute;
     margin: 0;
     display: inline-block; }
   .main-workspace .indicator {
