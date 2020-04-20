@@ -18,7 +18,7 @@ export class Indicator extends React.Component {
     render() {
         const item = this.props.item;
         return <div style={getIndicatorStyle(item, this.props.margin)} ref={this.props.elementRef}
-                    className="indicator"
+                    className="indicator drag-handler"
                     onMouseDown={() => console.log('down')}>
             {getIndicator()}
         </div>;

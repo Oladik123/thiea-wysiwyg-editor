@@ -9,6 +9,7 @@ export default class Item {
     startBit: string;
     dragTarget: string;
     fixedInList: boolean;
+    stateTarget: string;
     workspacePosition: {
         x: any,
         y: any
@@ -22,6 +23,7 @@ export default class Item {
         this.startBit = startBit;
         this.id = purpose + '-' + type + '-' + name;
         this.dragTarget = DragSources.unusedItems;
+        this.stateTarget = DragSources.unusedItems;
         this.fixedInList = true;
         this.workspacePosition = {
             x: 0,

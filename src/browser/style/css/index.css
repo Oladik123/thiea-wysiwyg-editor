@@ -58,3 +58,6 @@
   .list-item__indicator {
     position: relative;
     margin-left: auto; }
+
+.drag-handler {
+  cursor: move; }

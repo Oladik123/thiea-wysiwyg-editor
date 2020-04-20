@@ -35,7 +35,13 @@ export class Variable extends React.Component {
     }
 
     onMouseDown(event) {
-        this.state.indicatorMargin = event.clientX - this.elementRef.current.getBoundingClientRect().x - this.state.indicatorWidth / 2;
+        if (this.props.item.dragTarget === DragSources.usedItems) {
+            return
+        }
+        console.log(event.clientX, this.elementRef.current.getBoundingClientRect().x);
+        this.setState({
+            indicatorMargin: event.clientX - this.elementRef.current.getBoundingClientRect().x - this.state.indicatorWidth / 2
+        });
     }
 
     render() {
@@ -49,20 +55,28 @@ export class Variable extends React.Component {
                           onStart={() => this.props.onDragStart(item, this.elementRef.current)}
                           onMouseDown={this.onMouseDown}
                           defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}
-                          bounds={getBounds(item)}>
-            <div style={{position: 'relative'}}>
-                {item.dragTarget === DragSources.unusedItems ?
-                    <VariableInList item={item} elementRef={this.elementRef}/> :
+                          bounds={getBounds(item)}
+                          handle={'.drag-handler'}>
+            <div style={getStyle(item)}>
+                {!item.dragTarget || item.dragTarget === DragSources.unusedItems && item.stateTarget === DragSources.unusedItems ?
+                    <VariableInList item={item} elementRef={this.elementRef}
+                                    width={dragState.sizes.list.width - 24}/> :
                     <Indicator item={item} elementRef={this.elementRef} margin={this.state.indicatorMargin}/>
                 }
             </div>
         </Draggable>;
 
+        function getStyle(item) {
+            return {
+                zIndex: !item.fixedInList ? 1 : 0,
+                position: item.stateTarget === DragSources.unusedItems ? 'relative' : 'absolute'
+            };
+        }
+
         function getItemPosition(item: any) {
             return item.fixedInList ? {x: 0, y: 0} : undefined
 
         }
-
 
         function getBounds(item: any) {
             const listRect = dragState.sizes.list;

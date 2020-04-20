@@ -50,27 +50,28 @@ function onDragEnd(state: any, action: any) {
 
     const item = action.data.item;
     const element = action.data.element;
-    const unusedItem = result.unusedItems.find((element: any) => item.id === element.id);
+    const chosen = result.unusedItems.find((element: any) => item.id === element.id) ||
+        result.usedItems.find((element: any) => item.id === element.id);
 
-    if (unusedItem) {
-
-        if (!unusedItem.dragTarget || unusedItem.dragTarget === DragSources.unusedItems) {
-            unusedItem.dragTarget = DragSources.unusedItems;
-            unusedItem.fixedInList = true;
-        }
-
-        if (unusedItem.dragTarget === DragSources.usedItems) {
-            unusedItem.fixedInList = false;
-            unusedItem.workspacePosition = getPositionInWorkspace(state, element);
-            result.unusedItems = result.unusedItems.filter(item => item.id !== unusedItem.id);
-            result.usedItems.push(unusedItem);
-        }
+    if (!chosen.dragTarget || chosen.dragTarget === chosen.stateTarget) {
+        chosen.fixedInList = chosen.stateTarget === DragSources.unusedItems;
         return result;
     }
 
-    const usedItem = result.unusedItems.find((element: any) => item.id === element.id);
-    if (usedItem) {
+    if (chosen.dragTarget === DragSources.unusedItems) {
+        chosen.stateTarget = DragSources.unusedItems;
+        chosen.fixedInList = true;
+        chosen.workspacePosition = {x: 0, y: 0};
+        result.usedItems = result.usedItems.filter(item => item.id !== chosen.id);
+        result.unusedItems.push(chosen);
+    }
 
+    if (chosen.dragTarget === DragSources.usedItems) {
+        chosen.stateTarget = DragSources.usedItems;
+        chosen.fixedInList = false;
+        chosen.workspacePosition = getPositionInWorkspace(state, element);
+        result.unusedItems = result.unusedItems.filter(item => item.id !== chosen.id);
+        result.usedItems.push(chosen);
     }
 
     return result;
