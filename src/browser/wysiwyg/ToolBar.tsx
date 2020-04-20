@@ -32,7 +32,7 @@ export class ToolBar extends React.Component {
     }
 
     handleImageChange(event: any) {
-        if (!event.target.files || event.target.files.size === 0) {
+        if (!event.target.files || event.target.files.length === 0) {
             return;
         }
 
