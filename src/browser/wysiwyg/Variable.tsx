@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import Draggable from "react-draggable";
+import Draggable, {DraggableBounds} from "react-draggable";
 import {dragAction, dragEndAction, dragStartAction} from "./ReduxBasics/Actions";
 import DragSources from "./Model/DragSources";
+import {VariableInList} from "./VariableInList";
+import {Indicator} from "./Indicator";
 
 class VariableState {
 }
@@ -37,61 +39,38 @@ export class Variable extends React.Component {
     }
 
     render() {
+        const dragState = this.props.dragState;
         const item = this.props.item;
+
         return <Draggable ref={this.draggableRef}
                           position={getItemPosition(item)}
                           onDrag={() => this.props.onDrag(item, this.elementRef.current)}
                           onStop={() => this.props.onDragEnd(item, this.elementRef.current)}
                           onStart={() => this.props.onDragStart(item, this.elementRef.current)}
-                          onMouseDown={this.onMouseDown}>
-            {item.dragTarget === DragSources.unusedItems ?
-                <div className="list-item"
-                     style={getItemStyle(item)}
-                     ref={this.elementRef}>
-                    <div className="list-item__labels">
-                        <div className="list-item__title">
-                            {item.name}
-                        </div>
-                        <div className="list-item__properties">
-                            {item.purpose + ' ' + item.type + ' ' + item.ownerInputPort + ' ' + item.startBit}
-                        </div>
-                    </div>
-                    <div className="list-item__indicator">
-                        {getIndicator(this.state.indicatorHeight, this.state.indicatorWidth)}
-                    </div>
-                </div> :
-                <div style={getIndicatorStyle(item, this.state.indicatorMargin)} ref={this.elementRef}
-                     className="list-item__indicator">
-                    {getIndicator(this.state.indicatorHeight, this.state.indicatorWidth)}
-                </div>
-            }
+                          onMouseDown={this.onMouseDown}
+                          defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}
+                          bounds={getBounds(item)}>
+            <div style={{position: 'relative'}}>
+                {item.dragTarget === DragSources.unusedItems ?
+                    <VariableInList item={item} elementRef={this.elementRef}/> :
+                    <Indicator item={item} elementRef={this.elementRef} margin={this.state.indicatorMargin}/>
+                }
+            </div>
         </Draggable>;
 
-        function getIndicator(width, height) {
-            return <svg height={width} width={height}>
-                <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>
-            </svg>
-        }
-
         function getItemPosition(item: any) {
-            return item.fixedInList ? {x: 0, y: 0} : null
+            return item.fixedInList ? {x: 0, y: 0} : undefined
+
         }
 
-        function getItemStyle(item: any) {
-            return !item.fixedInList ? {zIndex: 1} : {zIndex: 0};
-        }
 
-        function getIndicatorStyle(item: any, indicatorMargin: any) {
-            return !item.fixedInList && item.dragTarget !== DragSources.unusedItems ?
-                {
-                    zIndex: 1,
-                    marginLeft: indicatorMargin,
-                    marginBottom: '16px'
-                } :
-                {
-                    zIndex: 0,
-                    marginLeft: 'auto'
-                }
+        function getBounds(item: any) {
+            const listRect = dragState.sizes.list;
+            const workspaceRect = dragState.sizes.workspace;
+            return {
+                left: -(workspaceRect.x - listRect.x),
+                top: 0,
+            } as DraggableBounds;
         }
 
     }

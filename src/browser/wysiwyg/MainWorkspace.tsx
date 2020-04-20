@@ -2,6 +2,7 @@ import * as React from 'react';
 import ConnectedMainImage from "./ImageComponent";
 import Draggable from 'react-draggable';
 import {connect} from "react-redux";
+import ConnectedVariable from "./Variable";
 
 class MainWorkspaceProps {
     image: any;
@@ -48,11 +49,11 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
+        const dragState = this.props.dragState;
+
         const getBounds = (item) => {
-            const listRect = this.props.dragState.sizes.list;
-            const workspaceRect = this.props.dragState.sizes.workspace;
-            const itemClientRect = item.clientRect;
-            console.log(itemClientRect.x, workspaceRect.y)
+            const listRect = dragState.sizes.list;
+            const workspaceRect = dragState.sizes.workspace;
             return {
                 left: -(workspaceRect.x - listRect.x),
                 top: 0,
@@ -65,16 +66,19 @@ export class MainWorkspace extends React.Component {
                     <ConnectedMainImage/>
                 </div>
             </Draggable>
-            {this.props.dragState.usedItems.map(item =>
-                <Draggable defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}
-                           key={item.id} bounds={getBounds(item)}>
-                    <div className="indicator">
-                        <svg height="50" width="50">
-                            <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>
-                        </svg>
-                    </div>
-                </Draggable>
-            )}
+            {dragState.usedItems.map(item => <ConnectedVariable className="indicator" item={item} key={item.id}/>)
+
+            }
+            {/*{dragState.usedItems.map(item =>*/}
+            {/*    <Draggable defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}*/}
+            {/*               key={item.id} bounds={getBounds(item)}>*/}
+            {/*        <div className="indicator">*/}
+            {/*            <svg height="50" width="50">*/}
+            {/*                <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>*/}
+            {/*            </svg>*/}
+            {/*        </div>*/}
+            {/*    </Draggable>*/}
+            {/*)}*/}
         </div>
     }
 }
