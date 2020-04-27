@@ -4,7 +4,7 @@ import Draggable, {DraggableBounds} from "react-draggable";
 import {dragAction, dragEndAction, dragStartAction} from "./ReduxBasics/Actions";
 import DragSources from "./Model/DragSources";
 import {VariableInList} from "./VariableInList";
-import {Indicator} from "./Indicator";
+import ConnectedIndicator from "./Indicator";
 
 class VariableState {
 }
@@ -61,7 +61,7 @@ export class Variable extends React.Component {
                 {!item.dragTarget || item.dragTarget === DragSources.unusedItems && item.stateTarget === DragSources.unusedItems ?
                     <VariableInList item={item} elementRef={this.elementRef}
                                     width={dragState.sizes.list.width - 24}/> :
-                    <Indicator item={item} elementRef={this.elementRef} margin={this.state.indicatorMargin}/>
+                    <ConnectedIndicator item={item} elementRef={this.elementRef} margin={this.state.indicatorMargin}/>
                 }
             </div>
         </Draggable>;

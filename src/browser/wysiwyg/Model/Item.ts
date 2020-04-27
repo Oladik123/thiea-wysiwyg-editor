@@ -1,4 +1,6 @@
 import DragSources from "./DragSources";
+import Indicator from "./Indicator/Indicator";
+import IndicatorType from "./IndicatorType";
 
 export default class Item {
     id: string;
@@ -10,6 +12,7 @@ export default class Item {
     dragTarget: string;
     fixedInList: boolean;
     stateTarget: string;
+    indicator: Indicator;
     workspacePosition: {
         x: any,
         y: any
@@ -29,5 +32,6 @@ export default class Item {
             x: 0,
             y: 0
         }
+        this.indicator = new Indicator(type.toLowerCase() === 'bool' ? IndicatorType.roundLed : IndicatorType.meter);
     }
 }

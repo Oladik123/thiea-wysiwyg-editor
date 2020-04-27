@@ -1,6 +1,9 @@
 import Action, {ActionTypes} from "../ReduxBasics/Actions";
 import Item from "../Model/Item";
 import DragSources from "../Model/DragSources";
+import RangedIndicator from "../Model/Indicator/RangedIndicator";
+import IndicatorType from "../Model/IndicatorType";
+import {BooleanIndicator} from "../Model/Indicator/BooleanIndicator";
 
 export function setImage(state: any = {}, action: Action) {
     return action.type === ActionTypes.setImage ? action.data.image : state
@@ -38,6 +41,8 @@ export function changeDragState(state: any = defaultDragState, action: Action) {
         return onDragStart(state, action);
     } else if (action.type === ActionTypes.drag) {
         return onDrag(state, action);
+    } else if (action.type === ActionTypes.selectIndicator) {
+        return onIndicatorSelected(state, action);
     } else {
         return state;
     }
@@ -157,4 +162,55 @@ function onResize(state: any, action: any) {
     }
 
     return result;
+}
+
+function onIndicatorSelected(state: any, action: any) {
+    const result = {
+        ...state
+    };
+
+    const actionItem = action.data.item;
+    const item = result.unusedItems.find(element => element.id === actionItem.id) ||
+        result.usedItems.find(element => element.id === actionItem.id);
+
+    item.indicator = action.data.indicator;
+    return result;
+}
+
+const defaultDropdownState = {
+    shown: false,
+    item: undefined,
+    top: 0,
+    left: 0
+}
+
+export function changeDropdownState(state: any = defaultDropdownState, action: Action) {
+    const result = {
+        ...state
+    };
+
+    if (action.type === ActionTypes.openSelectionIndicatorDropdown) {
+        result.shown = true;
+        result.item = action.data.item;
+        result.clientTop = action.data.event.clientY;
+        result.clientLeft = action.data.event.clientX
+    } else if (action.type === ActionTypes.selectIndicator) {
+        result.shown = false;
+        result.item = undefined;
+    }
+
+    return result;
+}
+
+const defaultAvailableIndicators = [
+    new RangedIndicator(IndicatorType.horizontalSlide),
+    new RangedIndicator(IndicatorType.verticalSlide),
+    new RangedIndicator(IndicatorType.meter),
+    new RangedIndicator(IndicatorType.numeric),
+    new BooleanIndicator(IndicatorType.roundLed),
+    new BooleanIndicator(IndicatorType.squareLed)
+]
+
+export function getAvailableIndicators(state = defaultAvailableIndicators, action: Action) {
+    return state;
 }

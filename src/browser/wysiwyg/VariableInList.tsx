@@ -1,5 +1,6 @@
 import * as React from 'react';
 import DragSources from "./Model/DragSources";
+import ConnectedIndicator from "./Indicator";
 
 class VariableInListProps {
 }
@@ -37,10 +38,8 @@ export class VariableInList extends React.Component {
                     {item.purpose + ' ' + item.type + ' ' + item.ownerInputPort + ' ' + item.startBit}
                 </div>
             </div>
-            <div className="list-item__indicator drag-handler">
-                <svg height={50} width={50}>
-                    <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>
-                </svg>
+            <div className="list-item__indicator">
+                <ConnectedIndicator item={item}/>
             </div>
         </div>
 

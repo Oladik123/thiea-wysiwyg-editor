@@ -1,9 +1,11 @@
 import {combineReducers, createStore} from "redux";
-import {changeDragState, setImage} from "./Reducers";
+import {changeDragState, changeDropdownState, getAvailableIndicators, setImage} from "./Reducers";
 
 const rootReducer = combineReducers({
     image: setImage,
-    dragState: changeDragState
+    dragState: changeDragState,
+    dropdownState: changeDropdownState,
+    availableIndicators: getAvailableIndicators
 })
 
 

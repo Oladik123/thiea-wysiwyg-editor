@@ -1,5 +1,8 @@
 import * as React from 'react';
 import DragSources from "./Model/DragSources";
+import {Meter} from "./IndicatorView/Meter";
+import {openSelectionIndicatorDropdown} from "./ReduxBasics/Actions";
+import {connect} from "react-redux";
 
 class IndicatorProps {
 }
@@ -13,20 +16,22 @@ export class Indicator extends React.Component {
 
     constructor(props: any) {
         super(props);
+        this.dialogRef = React.createRef();
+        this.state = {
+            modalShown: false
+        }
     }
 
     render() {
         const item = this.props.item;
         return <div style={getIndicatorStyle(item, this.props.margin)} ref={this.props.elementRef}
                     className="indicator drag-handler"
-                    onMouseDown={() => console.log('down')}>
+                    onContextMenu={(event) => this.props.onIndicatorRightClick(event, item)}>
             {getIndicator()}
         </div>;
 
         function getIndicator() {
-            return <svg height={50} width={50}>
-                <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>
-            </svg>
+            return <Meter item={item}/>
         }
 
         function getIndicatorStyle(item: any, indicatorMargin: any) {
@@ -45,3 +50,25 @@ export class Indicator extends React.Component {
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        onIndicatorRightClick: (event, item: any) => {
+            event.preventDefault();
+            dispatch(openSelectionIndicatorDropdown(event, item))
+        }
+    }
+}
+
+
+const ConnectedIndicator = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
+(Indicator);
+
+export default ConnectedIndicator;
