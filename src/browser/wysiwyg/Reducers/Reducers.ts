@@ -164,16 +164,30 @@ function onResize(state: any, action: any) {
     return result;
 }
 
+//dropdown
+const defaultAvailableIndicators = [
+    new RangedIndicator(IndicatorType.horizontalSlide),
+    new RangedIndicator(IndicatorType.verticalSlide),
+    new RangedIndicator(IndicatorType.meter),
+    new RangedIndicator(IndicatorType.numeric),
+    new BooleanIndicator(IndicatorType.roundLed),
+    new BooleanIndicator(IndicatorType.squareLed)
+]
+
 function onIndicatorSelected(state: any, action: any) {
     const result = {
         ...state
     };
 
+    if (!action.data.newType) {
+        return result;
+    }
     const actionItem = action.data.item;
     const item = result.unusedItems.find(element => element.id === actionItem.id) ||
         result.usedItems.find(element => element.id === actionItem.id);
 
-    item.indicator = action.data.indicator;
+    const newIndicator = defaultAvailableIndicators.find(indicator => indicator.type === action.data.newType);
+    item.indicator = JSON.parse(JSON.stringify(newIndicator));
     return result;
 }
 
@@ -201,15 +215,6 @@ export function changeDropdownState(state: any = defaultDropdownState, action: A
 
     return result;
 }
-
-const defaultAvailableIndicators = [
-    new RangedIndicator(IndicatorType.horizontalSlide),
-    new RangedIndicator(IndicatorType.verticalSlide),
-    new RangedIndicator(IndicatorType.meter),
-    new RangedIndicator(IndicatorType.numeric),
-    new BooleanIndicator(IndicatorType.roundLed),
-    new BooleanIndicator(IndicatorType.squareLed)
-]
 
 export function getAvailableIndicators(state = defaultAvailableIndicators, action: Action) {
     return state;

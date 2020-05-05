@@ -61,11 +61,11 @@ export function resizeAction(document: Document) {
     }
 }
 
-export function selectIndicator(item: any, indicator: any) {
+export function selectIndicator(item: any, newType: any) {
     return {
         type: ActionTypes.selectIndicator,
         data: {
-            indicator: indicator,
+            newType: newType,
             item: item
         }
     }

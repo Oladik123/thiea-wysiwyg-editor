@@ -29,7 +29,7 @@ export class SelectIndicatorDropdown extends React.Component {
         this.onMouseout = this.onMouseout.bind(this);
         this.onMouseover = this.onMouseover.bind(this);
         this.hide = this.hide.bind(this);
-        //setTimeout(this.hide, 500);
+        this.onItemSelected = this.onItemSelected.bind(this);
     }
 
     onMouseout(event) {
@@ -44,13 +44,17 @@ export class SelectIndicatorDropdown extends React.Component {
         if (!item || this.state.lastMouseoverTime >= this.state.lastMouseoutTime) {
             return
         }
-        this.props.onIndicatorSelect(item, item.indicator)
+        this.props.onIndicatorSelected(item, null)
     }
 
     onMouseover(event) {
         this.setState({
             lastMouseoverTime: event.timeStamp
         })
+    }
+
+    onItemSelected(type: IndicatorType) {
+        this.props.onIndicatorSelected(this.props.dropdownState.item, type)
     }
 
     render() {
@@ -68,20 +72,21 @@ export class SelectIndicatorDropdown extends React.Component {
                     .map(indicator => {
                         switch (indicator.type) {
                             case IndicatorType.roundLed:
-                                return {view:<RoundLed/>, key: indicator.type};
+                                return {view: <RoundLed/>, key: indicator.type};
                             case IndicatorType.squareLed:
-                                return {view:<SquareLed/>, key: indicator.type};
+                                return {view: <SquareLed/>, key: indicator.type};
                             case IndicatorType.numeric:
-                                return {view:<Numeric/>, key: indicator.type};
+                                return {view: <Numeric/>, key: indicator.type};
                             case IndicatorType.meter:
-                                return {view:<Meter/>, key: indicator.type};
+                                return {view: <Meter/>, key: indicator.type};
                             case IndicatorType.verticalSlide:
-                                return {view:<VSlide/>, key: indicator.type};
+                                return {view: <VSlide/>, key: indicator.type};
                             case IndicatorType.horizontalSlide:
-                                return {view:<HSlide/>, key: indicator.type};
+                                return {view: <HSlide/>, key: indicator.type};
                         }
                     })
-                    .map(indicator => <div className="dropdown__item" key={indicator.key}>
+                    .map(indicator => <div className="dropdown__item" key={indicator.key}
+                                           onClick={() => this.onItemSelected(indicator.key)}>
                         {indicator.view}
                     </div>)
                 }
@@ -108,7 +113,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        onIndicatorSelect: (item: any, indicator: any) => {
+        onIndicatorSelected: (item: any, indicator: any) => {
             dispatch(selectIndicator(item, indicator))
         }
     }
