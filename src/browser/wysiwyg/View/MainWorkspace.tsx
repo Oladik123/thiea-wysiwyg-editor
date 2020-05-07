@@ -51,34 +51,13 @@ export class MainWorkspace extends React.Component {
     render() {
         const dragState = this.props.dragState;
 
-        const getBounds = (item) => {
-            const listRect = dragState.sizes.list;
-            const workspaceRect = dragState.sizes.workspace;
-            return {
-                left: -(workspaceRect.x - listRect.x),
-                top: 0,
-            }
-        }
-
         return <div className="main-workspace" id="wysiwyg-workspace">
             <Draggable bounds="parent">
                 <div className="draggable-image" style={this.getDraggableImageStyles()}>
                     <ConnectedMainImage/>
                 </div>
             </Draggable>
-            {dragState.usedItems.map(item => <ConnectedVariable className="indicator" item={item} key={item.id}/>)
-
-            }
-            {/*{dragState.usedItems.map(item =>*/}
-            {/*    <Draggable defaultPosition={{x: item.workspacePosition.x, y: item.workspacePosition.y}}*/}
-            {/*               key={item.id} bounds={getBounds(item)}>*/}
-            {/*        <div className="indicator">*/}
-            {/*            <svg height="50" width="50">*/}
-            {/*                <circle cx="25" cy="25" r="20" stroke="black" strokeWidth="3" fill="red"/>*/}
-            {/*            </svg>*/}
-            {/*        </div>*/}
-            {/*    </Draggable>*/}
-            {/*)}*/}
+            {dragState.usedItems.map(item => <ConnectedVariable className="indicator" item={item} key={item.id}/>)}
         </div>
     }
 }
