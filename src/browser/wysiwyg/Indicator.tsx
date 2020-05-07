@@ -3,6 +3,12 @@ import DragSources from "./Model/DragSources";
 import {Meter} from "./IndicatorView/Meter";
 import {openSelectionIndicatorDropdown} from "./ReduxBasics/Actions";
 import {connect} from "react-redux";
+import IndicatorType from "./Model/IndicatorType";
+import {RoundLed} from "./IndicatorView/RoundLed";
+import {SquareLed} from "./IndicatorView/SquareLed";
+import {Numeric} from "./IndicatorView/Numeric";
+import {VSlide} from "./IndicatorView/VSlide";
+import {HSlide} from "./IndicatorView/HSlide";
 
 class IndicatorProps {
 }
@@ -31,7 +37,20 @@ export class Indicator extends React.Component {
         </div>;
 
         function getIndicator() {
-            return <Meter item={item}/>
+            switch (item.indicator.type) {
+                case IndicatorType.roundLed:
+                    return <RoundLed item={item}/>;
+                case IndicatorType.squareLed:
+                    return <SquareLed item={item}/>;
+                case IndicatorType.numeric:
+                    return <Numeric item={item}/>;
+                case IndicatorType.meter:
+                    return <Meter item={item}/>;
+                case IndicatorType.verticalSlide:
+                    return <VSlide item={item}/>;
+                case IndicatorType.horizontalSlide:
+                    return <HSlide item={item}/>;
+            }
         }
 
         function getIndicatorStyle(item: any, indicatorMargin: any) {

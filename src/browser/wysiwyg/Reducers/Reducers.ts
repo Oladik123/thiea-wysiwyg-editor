@@ -175,13 +175,11 @@ const defaultAvailableIndicators = [
 ]
 
 function onIndicatorSelected(state: any, action: any) {
-    const result = {
-        ...state
-    };
-
     if (!action.data.newType) {
-        return result;
+        return state;
     }
+
+    const result = JSON.parse(JSON.stringify(state));
     const actionItem = action.data.item;
     const item = result.unusedItems.find(element => element.id === actionItem.id) ||
         result.usedItems.find(element => element.id === actionItem.id);
