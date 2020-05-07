@@ -37,6 +37,38 @@
   box-sizing: border-box;
   padding: 8px; }
 
+.properties-list {
+  position: absolute;
+  z-index: 500;
+  left: 0;
+  width: 300px; }
+  .properties-list table {
+    width: 100%;
+    height: 100%; }
+  .properties-list table, .properties-list th, .properties-list td {
+    border: 1px solid #525252;
+    border-collapse: collapse; }
+  .properties-list th {
+    background-color: #202020;
+    height: 30px; }
+  .properties-list td {
+    background-color: #242424;
+    height: 30px; }
+  .properties-list .property-th {
+    width: 40%; }
+  .properties-list .property-td {
+    text-align: center; }
+  .properties-list .value-td {
+    padding-left: 5px; }
+  .properties-list .value {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center; }
+  .properties-list .pencil {
+    margin-left: auto;
+    margin-right: 10px; }
+
 .list-item {
   display: flex;
   flex-direction: row;

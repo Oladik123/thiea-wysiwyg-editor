@@ -6,6 +6,7 @@ import ConnectedToolbar from "./ToolBar";
 import ConnectedMainWorkspace from "./MainWorkspace";
 import {resizeAction} from "../ReduxBasics/Actions";
 import ConnectedSelectIndicatorDropdown from "./SelectIndicatorDropdown";
+import ConnectedPropertiesList from "./PropertiesList";
 
 class WysiwygProps {
     setCallback: Function;
@@ -41,6 +42,7 @@ export class Wysiwyg extends React.Component {
                     <ConnectedToolbar/>
                     <ConnectedMainWorkspace/>
                 </div>
+                <ConnectedPropertiesList/>
                 <ConnectedSelectIndicatorDropdown/>
             </Provider>
         </div>;

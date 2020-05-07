@@ -10,6 +10,7 @@ export default class Item {
     ownerInputPort: string;
     startBit: string;
     dragTarget: string;
+
     fixedInList: boolean;
     stateTarget: string;
     indicator: Indicator;
