@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from "react-redux";
 import Draggable, {DraggableBounds} from "react-draggable";
-import {dragAction, dragEndAction, dragStartAction} from "./ReduxBasics/Actions";
-import DragSources from "./Model/DragSources";
+import {dragAction, dragEndAction, dragStartAction} from "../ReduxBasics/Actions";
+import DragSources from "../Model/DragSources";
 import {VariableInList} from "./VariableInList";
 import ConnectedIndicator from "./Indicator";
 

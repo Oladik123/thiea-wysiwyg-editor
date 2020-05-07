@@ -1,10 +1,10 @@
 import * as React from 'react';
 import ConnectedElementsList from "./ElementsList";
 import {Provider} from 'react-redux'
-import {store} from "./Reducers"
+import {store} from "../Reducers"
 import ConnectedToolbar from "./ToolBar";
 import ConnectedMainWorkspace from "./MainWorkspace";
-import {resizeAction} from "./ReduxBasics/Actions";
+import {resizeAction} from "../ReduxBasics/Actions";
 import ConnectedSelectIndicatorDropdown from "./SelectIndicatorDropdown";
 
 class WysiwygProps {

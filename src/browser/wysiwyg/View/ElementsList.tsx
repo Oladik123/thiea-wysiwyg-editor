@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import State from "./Model/State";
+import State from "../Model/State";
 import ConnectedVariable from "./Variable";
 
 class ElementsListState {

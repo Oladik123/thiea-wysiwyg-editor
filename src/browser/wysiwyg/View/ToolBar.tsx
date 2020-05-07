@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {setImageAction} from "./ReduxBasics/Actions";
+import {setImageAction} from "../ReduxBasics/Actions";
 import {connect} from "react-redux";
 
 class ToolBarProps {

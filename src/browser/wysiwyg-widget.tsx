@@ -2,7 +2,7 @@ import * as React from 'react';
 import {inject, injectable, postConstruct} from 'inversify';
 import {ReactWidget} from '@theia/core/lib/browser/widgets/react-widget';
 import {MessageService} from '@theia/core';
-import {Wysiwyg} from './wysiwyg/Wysiwyg';
+import {Wysiwyg} from './wysiwyg/View/Wysiwyg';
 import {Widget} from '@theia/core/lib/browser';
 
 @injectable()

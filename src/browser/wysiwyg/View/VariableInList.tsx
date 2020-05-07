@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DragSources from "./Model/DragSources";
+import DragSources from "../Model/DragSources";
 import ConnectedIndicator from "./Indicator";
 
 class VariableInListProps {

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {selectIndicator} from "./ReduxBasics/Actions";
-import IndicatorType from "./Model/IndicatorType";
-import {RoundLed} from "./IndicatorView/RoundLed";
-import {SquareLed} from "./IndicatorView/SquareLed";
-import {Numeric} from "./IndicatorView/Numeric";
-import {Meter} from "./IndicatorView/Meter";
-import {VSlide} from "./IndicatorView/VSlide";
-import {HSlide} from "./IndicatorView/HSlide";
+import {selectIndicator} from "../ReduxBasics/Actions";
+import IndicatorType from "../Model/IndicatorType";
+import {RoundLed} from "../IndicatorView/RoundLed";
+import {SquareLed} from "../IndicatorView/SquareLed";
+import {Numeric} from "../IndicatorView/Numeric";
+import {Meter} from "../IndicatorView/Meter";
+import {VSlide} from "../IndicatorView/VSlide";
+import {HSlide} from "../IndicatorView/HSlide";
 
 class SelectIndicatorDropdownProps {
 }
