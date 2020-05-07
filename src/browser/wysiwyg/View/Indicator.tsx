@@ -1,14 +1,14 @@
 import * as React from 'react';
 import DragSources from "../Model/DragSources";
-import {Meter} from "../IndicatorView/Meter";
+import {Meter} from "./IndicatorView/Meter";
 import {openSelectionIndicatorDropdown} from "../ReduxBasics/Actions";
 import {connect} from "react-redux";
 import IndicatorType from "../Model/IndicatorType";
-import {RoundLed} from "../IndicatorView/RoundLed";
-import {SquareLed} from "../IndicatorView/SquareLed";
-import {Numeric} from "../IndicatorView/Numeric";
-import {VSlide} from "../IndicatorView/VSlide";
-import {HSlide} from "../IndicatorView/HSlide";
+import {RoundLed} from "./IndicatorView/RoundLed";
+import {SquareLed} from "./IndicatorView/SquareLed";
+import {Numeric} from "./IndicatorView/Numeric";
+import {VSlide} from "./IndicatorView/VSlide";
+import {HSlide} from "./IndicatorView/HSlide";
 
 class IndicatorProps {
 }
