@@ -38,7 +38,7 @@ export class Variable extends React.Component {
         if (this.props.item.dragTarget === DragSources.usedItems) {
             return
         }
-        console.log(event.clientX, this.elementRef.current.getBoundingClientRect().x);
+
         this.setState({
             indicatorMargin: event.clientX - this.elementRef.current.getBoundingClientRect().x - this.state.indicatorWidth / 2
         });
@@ -83,7 +83,7 @@ export class Variable extends React.Component {
             const workspaceRect = dragState.sizes.workspace;
             return {
                 left: -(workspaceRect.x - listRect.x),
-                top: 0,
+                top: item.stateTarget === DragSources.usedItems ? 0 : null
             } as DraggableBounds;
         }
 
