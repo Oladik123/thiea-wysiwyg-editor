@@ -1,11 +1,18 @@
 import {combineReducers, createStore} from "redux";
-import {changeDragState, changeDropdownState, getAvailableIndicators, setImage} from "./Reducers";
+import {
+    changeDropdownState,
+    changeItemsState,
+    getAvailableIndicators,
+    getPropertiesListState,
+    setImage
+} from "./Reducers";
 
 const rootReducer = combineReducers({
     image: setImage,
-    dragState: changeDragState,
+    itemsState: changeItemsState,
     dropdownState: changeDropdownState,
-    availableIndicators: getAvailableIndicators
+    availableIndicators: getAvailableIndicators,
+    propertiesListState: getPropertiesListState
 })
 
 

@@ -16,7 +16,7 @@ export class ElementsList extends React.Component {
 
 
     render() {
-        const elementList = this.props.dragState.unusedItems || [];
+        const elementList = this.props.itemsState.unusedItems || [];
         return <div className="elements-list" id="wysiwyg-elements-list">
             {elementList.map((element: any) => <ConnectedVariable item={element} key={element.id}/>)}
         </div>;

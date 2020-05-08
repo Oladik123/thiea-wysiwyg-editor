@@ -45,7 +45,7 @@ export class Variable extends React.Component {
     }
 
     render() {
-        const dragState = this.props.dragState;
+        const itemsState = this.props.itemsState;
         const item = this.props.item;
 
         return <Draggable ref={this.draggableRef}
@@ -60,7 +60,7 @@ export class Variable extends React.Component {
             <div style={getStyle(item)}>
                 {!item.dragTarget || item.dragTarget === DragSources.unusedItems && item.stateTarget === DragSources.unusedItems ?
                     <VariableInList item={item} elementRef={this.elementRef}
-                                    width={dragState.sizes.list.width - 24}/> :
+                                    width={itemsState.sizes.list.width - 24}/> :
                     <ConnectedIndicator item={item} elementRef={this.elementRef} margin={this.state.indicatorMargin}/>
                 }
             </div>
@@ -79,8 +79,8 @@ export class Variable extends React.Component {
         }
 
         function getBounds(item: any) {
-            const listRect = dragState.sizes.list;
-            const workspaceRect = dragState.sizes.workspace;
+            const listRect = itemsState.sizes.list;
+            const workspaceRect = itemsState.sizes.workspace;
             return {
                 left: -(workspaceRect.x - listRect.x),
                 top: item.stateTarget === DragSources.usedItems ? 0 : null

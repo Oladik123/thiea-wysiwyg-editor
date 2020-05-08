@@ -32,19 +32,22 @@ const defaultDragState = {
     unusedItems: getItems()
 }
 
-export function changeDragState(state: any = defaultDragState, action: Action) {
-    if (action.type === ActionTypes.resize) {
-        return onResize(state, action)
-    } else if (action.type === ActionTypes.dragEnd) {
-        return onDragEnd(state, action);
-    } else if (action.type === ActionTypes.dragStart) {
-        return onDragStart(state, action);
-    } else if (action.type === ActionTypes.drag) {
-        return onDrag(state, action);
-    } else if (action.type === ActionTypes.selectIndicator) {
-        return onIndicatorSelected(state, action);
-    } else {
-        return state;
+export function changeItemsState(state: any = defaultDragState, action: Action) {
+    switch (action.type) {
+        case ActionTypes.resize:
+            return onResize(state, action)
+        case ActionTypes.dragStart:
+            return onDragStart(state, action);
+        case ActionTypes.drag:
+            return onDrag(state, action);
+        case ActionTypes.dragEnd:
+            return onDragEnd(state, action);
+        case ActionTypes.selectIndicator:
+            return onIndicatorSelected(state, action);
+        case ActionTypes.changeIndicatorProperty:
+            return onItemPropertyChanged(state, action);
+        default:
+            return state;
     }
 }
 
@@ -164,6 +167,19 @@ function onResize(state: any, action: any) {
     return result;
 }
 
+function onItemPropertyChanged(state: any, action: any) {
+    const result = JSON.parse(JSON.stringify(state));
+    const itemId = action.data.itemId;
+    const item = result.unusedItems.find(item => item.id === itemId) ||
+        result.usedItems.find(item => item.id === itemId);
+
+    item.indicator = {
+        ...action.indicator
+    }
+
+    return result;
+}
+
 //dropdown
 const defaultAvailableIndicators = [
     new RangedIndicator(IndicatorType.horizontalSlide),
@@ -215,5 +231,16 @@ export function changeDropdownState(state: any = defaultDropdownState, action: A
 }
 
 export function getAvailableIndicators(state = defaultAvailableIndicators, action: Action) {
+    return state;
+}
+
+///
+export function getPropertiesListState(state: any = {}, action: Action) {
+    if (action.type === ActionTypes.chooseEditableItem) {
+        return {
+            itemId: action.data.itemId
+        }
+    }
+
     return state;
 }

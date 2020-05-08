@@ -1,3 +1,5 @@
+import Indicator from "../Model/Indicator/Indicator";
+
 export enum ActionTypes {
     openSelectionIndicatorDropdown,
     setImage,
@@ -5,7 +7,9 @@ export enum ActionTypes {
     dragStart,
     drag,
     resize,
-    selectIndicator
+    selectIndicator,
+    changeIndicatorProperty,
+    chooseEditableItem
 }
 
 export default class Action {
@@ -71,12 +75,22 @@ export function selectIndicator(item: any, newType: any) {
     }
 }
 
-export function openSelectionIndicatorDropdown(event, item: any) {
+export function openSelectionIndicatorDropdown(event: any, item: any) {
     return {
         type: ActionTypes.openSelectionIndicatorDropdown,
         data: {
             event: event,
             item: item
+        }
+    }
+}
+
+export function updateIndicatorProperties(itemId: string, indicator: Indicator) {
+    return {
+        type: ActionTypes.openSelectionIndicatorDropdown,
+        data: {
+            itemId: itemId,
+            indicator: indicator
         }
     }
 }

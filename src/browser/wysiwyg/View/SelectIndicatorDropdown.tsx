@@ -59,7 +59,7 @@ export class SelectIndicatorDropdown extends React.Component {
 
     render() {
         const state = this.props.dropdownState;
-        const sizes = this.props.dragState.sizes;
+        const sizes = this.props.itemsState.sizes;
         if (!state.item) {
             return null
         }

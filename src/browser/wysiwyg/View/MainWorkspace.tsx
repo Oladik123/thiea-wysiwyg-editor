@@ -49,7 +49,7 @@ export class MainWorkspace extends React.Component {
     }
 
     render() {
-        const dragState = this.props.dragState;
+        const itemsState = this.props.itemsState;
 
         return <div className="main-workspace" id="wysiwyg-workspace">
             <Draggable bounds="parent">
@@ -57,7 +57,7 @@ export class MainWorkspace extends React.Component {
                     <ConnectedMainImage/>
                 </div>
             </Draggable>
-            {dragState.usedItems.map(item => <ConnectedVariable className="indicator" item={item} key={item.id}/>)}
+            {itemsState.usedItems.map(item => <ConnectedVariable className="indicator" item={item} key={item.id}/>)}
         </div>
     }
 }

@@ -16,16 +16,19 @@ export class PropertiesList extends React.Component {
 
 
     render() {
+        const itemId = this.props.propertiesListState.itemId;
+        const item = this.props.itemsState.unusedItems.find(item => item.id === itemId) ||
+            this.props.itemsState.usedItems.find(item => item.id === itemId);
+
         const getStyle = () => {
-            const editorRect = this.props.dragState.sizes.editor;
-            console.log(editorRect.x, this.PropertiesListWidth);
+            const editorRect = this.props.itemsState.sizes.editor;
             return editorRect && editorRect.width ? {
                     left: editorRect.x + editorRect.width - this.PropertiesListWidth + 'px'
                 } :
                 {}
         }
 
-        return <div className="properties-list" style={getStyle()}>
+        return item ? <div className="properties-list" style={getStyle()}>
             <table className="table">
                 <thead>
                 <tr>
@@ -77,7 +80,7 @@ export class PropertiesList extends React.Component {
                 </tr>
                 </tbody>
             </table>
-        </div>;
+        </div> : null;
     }
 }
 
